@@ -1,5 +1,6 @@
 from flask import Flask,request,render_template,jsonify
 from src.pipelines.prediction_pipeline import CustomData,PredictPipeline
+from src.pipelines.training_pipeline import main
 
 
 application=Flask(__name__)
@@ -29,6 +30,7 @@ def predict_datapoint():
             clarity = request.form.get('clarity')
         )
         final_new_data=data.get_data_as_dataframe()
+        main()
         predict_pipeline=PredictPipeline()
         pred=predict_pipeline.predict(final_new_data)
 
